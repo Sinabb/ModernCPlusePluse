@@ -1,25 +1,23 @@
 #include <iostream>
 #include <vector>
 
-enum class Flages
+template<typename T>
+T Sum(T first)
 {
-	slow,
-	poison
-};
+	return first;
+}
+
+template<typename T, typename ... Args>
+T Sum(T first, Args... args)
+{
+	return first + Sum(args...);
+}
+
+using namespace std::string_literals;
 
 int main()
 {
-	Flages f;
-
-	f = Flages::slow;
-
-	switch (f)
-	{
-	case Flages::slow:
-		break;
-	case Flages::poison:
-		break;
-	default:
-		break;
-	}
+	std::cout << Sum(1) << std::endl;
+	std::cout << Sum(1, 2, 3,4) << std::endl;
+	std::cout << Sum("a"s, "b"s, "c"s, "d"s) << std::endl;
 }
