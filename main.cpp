@@ -1,23 +1,29 @@
 #include <iostream>
 #include <vector>
 
-template<typename T>
-T Sum(T first)
+class Warrior
 {
-	return first;
-}
+public:
+	int mHealth;
+	int mAttack;
 
-template<typename T, typename ... Args>
-T Sum(T first, Args... args)
-{
-	return first + Sum(args...);
-}
+	Warrior(int h, int a) : mHealth{ h }, mAttack{ a }
+	{
 
-using namespace std::string_literals;
+	}
+};
 
 int main()
 {
-	std::cout << Sum(1) << std::endl;
-	std::cout << Sum(1, 2, 3,4) << std::endl;
-	std::cout << Sum("a"s, "b"s, "c"s, "d"s) << std::endl;
+	Warrior* p = new Warrior(100, 10);
+	p->mHealth;
+
+	p->mHealth = 100;
+	(*p).mHealth = 100;
+	delete p;
+
+
+	std::unique_ptr<Warrior> spWarrior = std::make_unique<Warrior>(100, 20);
+
+
 }
