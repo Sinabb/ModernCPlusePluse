@@ -1,13 +1,20 @@
 #include <iostream>
 #include <vector>
 
-class Warrior
+class Image
+{
+
+};
+
+class Demon
 {
 public:
 	int mHealth;
 	int mAttack;
 
-	Warrior(int h, int a) : mHealth{ h }, mAttack{ a }
+	std::shared_ptr<Image> mspImage;
+
+	Demon(int h, int a, std::shared_ptr<Image> spImage) : mHealth{ h }, mAttack{ a },mspImage{spImage}
 	{
 
 	}
@@ -15,15 +22,12 @@ public:
 
 int main()
 {
-	Warrior* p = new Warrior(100, 10);
-	p->mHealth;
-
-	p->mHealth = 100;
-	(*p).mHealth = 100;
-	delete p;
-
-
-	std::unique_ptr<Warrior> spWarrior = std::make_unique<Warrior>(100, 20);
-
+	std::shared_ptr<Image> spImage = std::make_shared<Image>();
+	{
+		std::unique_ptr<Demon> spDemon = std::make_unique<Demon>(100,10,spImage);
+		{
+			std::unique_ptr<Demon> spDemon2 = std::make_unique<Demon>(100, 10, spImage);
+		}
+	}
 
 }
